@@ -6,6 +6,7 @@ import Layout from "./Components/Layout";
 import AuthPage from "./pages/AuthPage";
 import NeedAuth from "./Components/NeedAuth";
 import useAutoLogout from "./hooks/useAutoLogout";
+import StudentList from "./Components/StudentList/StudentList";
 function App() {
   useAutoLogout();
   return (
@@ -21,6 +22,14 @@ function App() {
           }
         />
         <Route path="authform" element={<AuthPage />} />
+        <Route
+          path="student"
+          element={
+            <NeedAuth>
+              <StudentList />
+            </NeedAuth>
+          }
+        />
       </Routes>
     </Layout>
   );

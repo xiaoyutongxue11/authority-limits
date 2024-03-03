@@ -6,7 +6,8 @@ const useAutoLogout = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     const timeout = auth.expirationTime - Date.now();
-    if (timeout < 4000) {
+    const minTimeout = 1000 * 60;
+    if (timeout < minTimeout) {
       dispatch(logoutHandler());
       return;
     }
