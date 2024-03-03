@@ -4,6 +4,7 @@ import { useRegisterMutation, useLoginMutation } from "../store/api/authApi";
 import { useDispatch } from "react-redux";
 import { loginHandler } from "../store/reducer/authSlice";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 const AuthForm = () => {
   const usernameInp = useRef();
   const passwordInp = useRef();
@@ -13,6 +14,8 @@ const AuthForm = () => {
   const [login, { error: loginError }] = useLoginMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+  const fromWere = location.state?.preLocation || "/";
   const submitHandler = (e) => {
     e.preventDefault();
     const username = usernameInp.current.value;
@@ -29,7 +32,7 @@ const AuthForm = () => {
               user: res.data.user,
             })
           );
-          navigate("/", { replace: true });
+          navigate(fromWere, { replace: true });
         }
       });
     } else {
