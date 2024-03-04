@@ -4,6 +4,14 @@ const studentApi = createApi({
   reducerPath: "studentApi", //Api的唯一标识
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:1337/api/", //请求基路径
+    prepareHeaders: (headers, { getState }) => {
+      const token = getState().auth.token;
+      console.log(token);
+      if (token) {
+        headers.set("Authorization", `Bearer ${token}`);
+      }
+      return headers;
+    },
   }),
   tagTypes: ["student"],
   endpoints(build) {
